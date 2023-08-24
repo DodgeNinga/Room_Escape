@@ -24,10 +24,10 @@ public class PlayerRoot : MonoObject
     public override void Awake()
     {
 
-        groundSencer = controller.transform.Find("GroundSencer").GetComponent<CollisionSencer>();
+        groundSencer = transform.Find("GroundSencer").GetComponent<CollisionSencer>();
 
-        rigid = controller.GetComponent<Rigidbody>();
-        value = controller.GetComponent<PlayerValue>();
+        rigid = transform.GetComponent<Rigidbody>();
+        value = transform.GetComponent<PlayerValue>();
 
     }
 

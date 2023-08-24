@@ -29,11 +29,15 @@ public class PlayerController : MonoBehaviour
         
         inputSystem = new PlayerInputSystem();
         var playerMove = new PlayerMove(this);
+        var playerJump = new PlayerJump(this);
+        var cameraRotate = new CameraRotate(this);
 
         HashSet<IUpdate> moveStateUpdate = new()
         {
 
             playerMove,
+            playerJump,
+            cameraRotate,
             inputSystem
 
         };
@@ -47,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         
-        for(var i = stateUpdateContainer[currentState].GetEnumerator(); i.MoveNext();)
+        for(var i = updateContainer.GetEnumerator(); i.MoveNext();)
         {
 
             if (i.Current.enable == false) break;
@@ -61,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
-        for (var i = stateFixedUpdateContainer[currentState].GetEnumerator(); i.MoveNext();)
+        for (var i = fixedUpdateContainer.GetEnumerator(); i.MoveNext();)
         {
 
             if (i.Current.enable == false) break;
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
 
-        for (var i = stateLateUpdateContainer[currentState].GetEnumerator(); i.MoveNext();)
+        for (var i = lateUpdateContainer.GetEnumerator(); i.MoveNext();)
         {
 
             if (i.Current.enable == false) break;

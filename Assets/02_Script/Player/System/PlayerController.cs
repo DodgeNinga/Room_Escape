@@ -22,13 +22,23 @@ public class PlayerController : MonoBehaviour
     private HashSet<ILateUpdate> lateUpdateContainer = new();
     private PlayerState currentState = PlayerState.Move;
 
-
     public PlayerInputSystem inputSystem { get; private set; }
 
     private void Awake()
     {
         
         inputSystem = new PlayerInputSystem();
+
+        HashSet<IUpdate> moveStateUpdate = new()
+        {
+
+            inputSystem
+
+        };
+
+        stateUpdateContainer.Add(PlayerState.Move, moveStateUpdate);
+
+        ChangeState(currentState);
 
     }
 
@@ -155,7 +165,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentState = state;
-
+        
     }
 
 }

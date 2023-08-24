@@ -6,5 +6,6 @@ public class PlayerValue : MonoBehaviour
 {
 
     [field:SerializeField] public float moveSpeed { get; private set; }
+    [field:SerializeField] public float jumpPower { get; private set; }
 
 }

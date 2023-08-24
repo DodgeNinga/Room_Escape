@@ -11,7 +11,7 @@ public class PlayerJump : PlayerRoot
     public override void Update()
     {
 
-        if (input[KeyCode.Space, KeyState.Down])
+        if (input[KeyCode.Space, KeyState.Down] && isGround)
         {
 
 

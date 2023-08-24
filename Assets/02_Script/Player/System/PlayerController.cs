@@ -28,10 +28,12 @@ public class PlayerController : MonoBehaviour
     {
         
         inputSystem = new PlayerInputSystem();
+        var playerMove = new PlayerMove(this);
 
         HashSet<IUpdate> moveStateUpdate = new()
         {
 
+            playerMove,
             inputSystem
 
         };

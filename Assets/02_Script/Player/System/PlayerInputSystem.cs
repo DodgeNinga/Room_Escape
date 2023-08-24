@@ -12,6 +12,14 @@ public enum KeyState
 
 }
 
+public enum AxisState
+{
+
+    Default,
+    Raw
+
+}
+
 public class PlayerInputSystem : IUpdate
 {
 
@@ -32,6 +40,25 @@ public class PlayerInputSystem : IUpdate
                 KeyState.Up => Input.GetKeyUp(key),
                 KeyState.Alway => Input.GetKey(key),
                 _ => false
+
+            };
+
+        }
+
+    }
+    public float this[string axisName, AxisState state]
+    {
+
+        get
+        {
+
+            if (!enable) return 0f;
+            else return state switch
+            {
+
+                AxisState.Raw => Input.GetAxisRaw(axisName),
+                AxisState.Default => Input.GetAxis(axisName),
+                _ => 0f
 
             };
 
@@ -60,7 +87,7 @@ public class PlayerInputSystem : IUpdate
 
     public void Update()
     {
-
+        
         for(var i = inputEvent.GetEnumerator(); i.MoveNext(); )
         {
 

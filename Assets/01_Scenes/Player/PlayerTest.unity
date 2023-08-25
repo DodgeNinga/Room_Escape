@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <moveSpeed>k__BackingField: 3
-  <jumpPower>k__BackingField: 3
+  <jumpPower>k__BackingField: 7
   <lookSensitivity>k__BackingField: 120
   <maxRotate>k__BackingField: 70
 --- !u!1 &559089810

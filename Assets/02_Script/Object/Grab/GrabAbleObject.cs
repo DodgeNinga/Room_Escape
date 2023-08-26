@@ -5,18 +5,9 @@ using UnityEngine;
 public class GrabAbleObject : MonoBehaviour, IGrab
 {
 
-    public PlayerInputSystem input;
+    [field:SerializeField] public float objectSize { get; set; }
 
-    public float objectSize { get; set; }
     public bool grabAble { get; set; }
-
-    private void Start()
-    {
-
-        input = FindObjectOfType<PlayerController>().inputSystem;
-
-    }
-
 
     public void ChangeTrm(Vector3 pos)
     {

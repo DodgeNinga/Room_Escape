@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerGrab : PlayerRoot
 {
 
-    private (IGrab, Transform) grabObject;
+    private (IGrab, Transform, Collider, Rigidbody) grabObject;
     private Transform cameraRootTrm;
 
     private float InteractionRange => value.maxInteractionRange;
@@ -14,11 +14,65 @@ public class PlayerGrab : PlayerRoot
     {
     }
 
-    private void SetGrabObject(IGrab grab, Transform trm)
+    private void SetGrabObject(IGrab grab, Transform trm, Collider collider, Rigidbody rigid)
     {
 
         grabObject.Item1 = grab;
         grabObject.Item2 = trm;
+        grabObject.Item3 = collider;
+        grabObject.Item4 = rigid;
+
+    }
+
+    private void TryGrabObject()
+    {
+
+        if (Physics.Raycast(cameraRootTrm.position, cameraRootTrm.forward,
+            out var obj, InteractionRange, LayerMask.GetMask("Interaction")))
+        {
+
+            if (obj.transform.TryGetComponent<IGrab>(out var compo))
+            {
+
+                compo.OnGrab();
+
+                SetGrabObject(compo, obj.transform, obj.collider, obj.rigidbody);
+
+                obj.collider.enabled = false;
+
+            }
+
+        }
+
+    }
+    private void TryReleaseGrab()
+    {
+
+        grabObject.Item1.OnGrabRelease();
+        grabObject.Item3.enabled = true;
+        grabObject.Item4.velocity = Vector3.zero;
+        SetGrabObject(null, null, null, null);
+
+    }
+
+    private Vector3 CalculateObjectPos(float objSize)
+    {
+
+        var vel = Physics.Raycast(cameraRootTrm.position, cameraRootTrm.forward, out var info, InteractionRange);
+
+        if (vel && info.transform != grabObject.Item2)
+        {
+
+            float length = Vector3.Distance(info.point, cameraRootTrm.position);
+            return cameraRootTrm.position + (cameraRootTrm.forward * (length - objSize));
+
+        }
+        else
+        {
+
+            return cameraRootTrm.position + (cameraRootTrm.forward * InteractionRange);
+
+        }
 
     }
 
@@ -34,35 +88,31 @@ public class PlayerGrab : PlayerRoot
     public override void Update()
     {
 
-
-
-    }
-
-    public void TryGrabObject()
-    {
-
-        if (Physics.Raycast(cameraRootTrm.position, cameraRootTrm.forward,
-            out var obj, InteractionRange, LayerMask.GetMask("Interaction")))
+        if(grabObject.Item1 != null)
         {
 
-            if (obj.transform.TryGetComponent<IGrab>(out var compo))
+            grabObject.Item1.ChangeTrm(CalculateObjectPos(grabObject.Item1.objectSize));
+
+
+            if (input[MouseCode.Left, KeyState.Up])
             {
 
-                compo.OnGrab();
-
-                SetGrabObject(compo, obj.transform);
+                TryReleaseGrab();
 
             }
 
         }
+        else
+        {
 
-    }
+            if (input[MouseCode.Left, KeyState.Down])
+            {
 
-    public void TryReleaseGrab()
-    {
+                TryGrabObject();
 
-        grabObject.Item1.OnGrabRelease();
-        SetGrabObject(null, null);
+            }
+
+        }
 
     }
 

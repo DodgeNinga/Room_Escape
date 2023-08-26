@@ -9,5 +9,6 @@ public class PlayerValue : MonoBehaviour
     [field:SerializeField] public float jumpPower { get; private set; }
     [field:SerializeField] public float lookSensitivity { get; private set; }
     [field:SerializeField] public float maxRotate { get; private set; }
+    [field:SerializeField] public float maxInteractionRange { get; private set; }
 
 }

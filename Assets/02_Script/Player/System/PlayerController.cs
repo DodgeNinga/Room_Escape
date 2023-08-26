@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         var playerMove = new PlayerMove(this);
         var playerJump = new PlayerJump(this);
         var cameraRotate = new CameraRotate(this);
+        var playerInteraction = new PlayerInteraction(this);
         var gravity = new Gravity(transform);
 
         HashSet<IUpdate> moveStateUpdate = new()
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
             playerMove,
             playerJump,
             cameraRotate,
+            playerInteraction,
             inputSystem
 
         };

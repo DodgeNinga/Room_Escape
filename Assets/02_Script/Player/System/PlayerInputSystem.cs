@@ -12,6 +12,15 @@ public enum KeyState
 
 }
 
+public enum MouseCode
+{
+
+    Left = 0,
+    Right = 1,
+    Middle = 2
+
+}
+
 public enum AxisState
 {
 
@@ -39,6 +48,27 @@ public class PlayerInputSystem : IUpdate
                 KeyState.Down => Input.GetKeyDown(key),
                 KeyState.Up => Input.GetKeyUp(key),
                 KeyState.Alway => Input.GetKey(key),
+                _ => false
+
+            };
+
+        }
+
+    }
+    public bool this[MouseCode button, KeyState state]
+    {
+
+        get
+        {
+
+            if (!enable) return false;
+
+            return state switch
+            {
+
+                KeyState.Down => Input.GetMouseButtonDown((int)button),
+                KeyState.Up => Input.GetMouseButtonUp((int)button),
+                KeyState.Alway => Input.GetMouseButton((int)button),
                 _ => false
 
             };
@@ -106,12 +136,14 @@ public class PlayerInputSystem : IUpdate
         }
 
     }
+
     public void Disable()
     {
 
         enable = false;
 
     }
+
     public void Enable()
     {
 

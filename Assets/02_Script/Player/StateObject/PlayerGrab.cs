@@ -64,6 +64,7 @@ public class PlayerGrab : PlayerRoot
         {
 
             float length = Vector3.Distance(info.point, cameraRootTrm.position);
+
             return cameraRootTrm.position + (cameraRootTrm.forward * (length - objSize));
 
         }

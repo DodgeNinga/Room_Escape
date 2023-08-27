@@ -17,7 +17,6 @@ public class GrabAbleObject : MonoBehaviour, IGrab
     }
 
 
-
 #if UNITY_EDITOR
 
     private void OnDrawGizmos()

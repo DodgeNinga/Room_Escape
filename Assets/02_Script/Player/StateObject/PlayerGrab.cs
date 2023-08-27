@@ -50,7 +50,14 @@ public class PlayerGrab : PlayerRoot
 
         grabObject.Item1.OnGrabRelease();
         grabObject.Item3.enabled = true;
-        grabObject.Item4.velocity = Vector3.zero;
+
+        if(grabObject.Item4 != null)
+        {
+
+            grabObject.Item4.velocity = Vector3.zero;
+
+        }
+
         SetGrabObject(null, null, null, null);
 
     }

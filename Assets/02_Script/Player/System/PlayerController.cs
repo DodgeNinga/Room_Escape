@@ -7,6 +7,7 @@ public enum PlayerState
 
     None = -1,
     Move,
+    DoorMake,
     Die
 
 }
@@ -14,49 +15,20 @@ public enum PlayerState
 public class PlayerController : MonoBehaviour
 {
 
-    private Dictionary<PlayerState, HashSet<IUpdate>> stateUpdateContainer = new();
-    private Dictionary<PlayerState, HashSet<IFixedUpdate>> stateFixedUpdateContainer = new();
-    private Dictionary<PlayerState, HashSet<ILateUpdate>> stateLateUpdateContainer = new();
-    private HashSet<IUpdate> updateContainer = new();
-    private HashSet<IFixedUpdate> fixedUpdateContainer = new();
-    private HashSet<ILateUpdate> lateUpdateContainer = new();
-    private PlayerState currentState = PlayerState.Move;
+    protected Dictionary<PlayerState, HashSet<IUpdate>> stateUpdateContainer = new();
+    protected Dictionary<PlayerState, HashSet<IFixedUpdate>> stateFixedUpdateContainer = new();
+    protected Dictionary<PlayerState, HashSet<ILateUpdate>> stateLateUpdateContainer = new();
+    protected HashSet<IUpdate> updateContainer = new();
+    protected HashSet<IFixedUpdate> fixedUpdateContainer = new();
+    protected HashSet<ILateUpdate> lateUpdateContainer = new();
+    protected PlayerState currentState = PlayerState.Move;
 
     public PlayerInputSystem inputSystem { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
-           
+
         inputSystem = new PlayerInputSystem();
-        var playerMove = new PlayerMove(this);
-        var playerJump = new PlayerJump(this);
-        var cameraRotate = new CameraRotate(this);
-        var playerInteraction = new PlayerInteraction(this);
-        var playerGrab = new PlayerGrab(this);
-        var gravity = new Gravity(transform);
-
-        HashSet<IUpdate> moveStateUpdate = new()
-        {
-
-            playerMove,
-            playerJump,
-            cameraRotate,
-            playerInteraction,
-            playerGrab,
-            inputSystem
-
-        };
-
-        HashSet<IFixedUpdate> moveFixedUpdate = new()
-        {
-
-            gravity
-
-        };
-
-        stateUpdateContainer.Add(PlayerState.Move, moveStateUpdate);
-        stateFixedUpdateContainer.Add(PlayerState.Move, moveFixedUpdate);
-        ChangeState(currentState);
 
     }
 

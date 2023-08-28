@@ -10,14 +10,14 @@ Material:
   m_Name: Plastic_Rough_Mat
   m_Shader: {fileID: 4800000, guid: 0ba4cb1f0df954c478baf740bac0744b, type: 3}
   m_ValidKeywords:
-  - _AD_CUTOUT_GEOMETRIC_TYPE_XYZ
+  - _AD_CUTOUT_GEOMETRIC_COUNT_TWO
+  - _AD_CUTOUT_GEOMETRIC_TYPE_CUBE
   - _AD_CUTOUT_STANDARD_SOURCE_CUSTOM_MAP
+  - _AD_CUTOUT_STANDARD_SOURCE_MAPS_MAPPING_TYPE_TRIPLANAR
   - _AD_EDGE_BASE_SOURCE_ALL
   - _AD_STATE_ENABLED
   - _DISABLE_SSR_TRANSPARENT
   m_InvalidKeywords:
-  - _AD_CUTOUT_GEOMETRIC_COUNT_ONE
-  - _AD_CUTOUT_STANDARD_SOURCE_MAPS_MAPPING_TYPE_DEFAULT
   - _AD_EDGE_ADDITIONAL_COLOR_NONE
   - _AD_EDGE_UV_DISTORTION_SOURCE_DEFAULT
   - _AD_GLOBAL_CONTROL_ID_NONE
@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AdvancedDissolveCutoutStandardMap1:
-        m_Texture: {fileID: 2800000, guid: 15156bfb2d3680b42b640ccf7d864400, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2a9fd0fcb9317bd46997cc26d38f2f23, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AdvancedDissolveCutoutStandardMap2:
@@ -242,7 +242,7 @@ Material:
     - _AdvancedDissolveCutoutGeometric4Height: 1
     - _AdvancedDissolveCutoutGeometric4Radius: 1
     - _AdvancedDissolveCutoutGeometricInvert: 0
-    - _AdvancedDissolveCutoutGeometricNoise: 0
+    - _AdvancedDissolveCutoutGeometricNoise: -0.15
     - _AdvancedDissolveCutoutGeometricXYZAxis: 2
     - _AdvancedDissolveCutoutGeometricXYZRollout: 0
     - _AdvancedDissolveCutoutGeometricXYZSpace: 0
@@ -324,7 +324,7 @@ Material:
     - _AdvancedDissolveEdgeAdditionalColorTransparency: 1
     - _AdvancedDissolveEdgeAlphaOffset: 0
     - _AdvancedDissolveEdgeBaseColorTransparency: 1
-    - _AdvancedDissolveEdgeBaseShape: 0
+    - _AdvancedDissolveEdgeBaseShape: 2
     - _AdvancedDissolveEdgeBaseWidthGeometric: 0.1
     - _AdvancedDissolveEdgeBaseWidthParametric: 0.1
     - _AdvancedDissolveEdgeBaseWidthSimple: 0.1
@@ -339,8 +339,8 @@ Material:
     - _AdvancedDissolveEdgeShape: 2
     - _AdvancedDissolveEdgeUVDistortionStrength: 0
     - _AdvancedDissolveEdgeWidth: 0.285
-    - _AdvancedDissolveKeywordCutoutGeometricCount: 0
-    - _AdvancedDissolveKeywordCutoutGeometricType: 1
+    - _AdvancedDissolveKeywordCutoutGeometricCount: 1
+    - _AdvancedDissolveKeywordCutoutGeometricType: 4
     - _AdvancedDissolveKeywordCutoutMappingType: 1
     - _AdvancedDissolveKeywordCutoutParametricCount: 1
     - _AdvancedDissolveKeywordCutoutParametricType: 4
@@ -348,7 +348,7 @@ Material:
     - _AdvancedDissolveKeywordCutoutSimpleSource: 2
     - _AdvancedDissolveKeywordCutoutSource: 1
     - _AdvancedDissolveKeywordCutoutStandardSource: 2
-    - _AdvancedDissolveKeywordCutoutStandardSourceMapsMappingType: 0
+    - _AdvancedDissolveKeywordCutoutStandardSourceMapsMappingType: 1
     - _AdvancedDissolveKeywordDynamicMaskCount: 1
     - _AdvancedDissolveKeywordDynamicMaskType: 1
     - _AdvancedDissolveKeywordEdgeAdditionalColorSource: 0
@@ -562,8 +562,8 @@ Material:
     - _AdvancedDissolveCutoutSimpleMap3Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _AdvancedDissolveCutoutSimpleMap3Tiling: {r: 1, g: 1, b: 1, a: 0}
     - _AdvancedDissolveCutoutStandardMap1Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _AdvancedDissolveCutoutStandardMap1Scroll: {r: 0, g: 0, b: 0, a: 0}
-    - _AdvancedDissolveCutoutStandardMap1Tiling: {r: 1, g: 1, b: 1, a: 0}
+    - _AdvancedDissolveCutoutStandardMap1Scroll: {r: 0, g: 0.5, b: 0, a: 0}
+    - _AdvancedDissolveCutoutStandardMap1Tiling: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _AdvancedDissolveCutoutStandardMap2Offset: {r: 0, g: 0, b: 0, a: 0}
     - _AdvancedDissolveCutoutStandardMap2Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _AdvancedDissolveCutoutStandardMap2Tiling: {r: 1, g: 1, b: 1, a: 0}
@@ -583,8 +583,8 @@ Material:
     - _AdvancedDissolveEdgeAdditionalColorMapOffset: {r: 0, g: 0, b: 0, a: 0}
     - _AdvancedDissolveEdgeAdditionalColorMapScroll: {r: 0, g: 0, b: 0, a: 0}
     - _AdvancedDissolveEdgeAdditionalColorMapTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _AdvancedDissolveEdgeBaseColor: {r: 0.8148468, g: 0.00699541, b: 0.57758063, a: 1}
-    - _AdvancedDissolveEdgeBaseColorIntensity: {r: 10, g: 22025.465, b: 0, a: 0}
+    - _AdvancedDissolveEdgeBaseColor: {r: 0.013702081, g: 0.2086369, b: 0.68668544, a: 1}
+    - _AdvancedDissolveEdgeBaseColorIntensity: {r: 11, g: 59873.14, b: 0, a: 0}
     - _AdvancedDissolveEdgeColor: {r: 0.015224886, g: 0.48570853, b: 0.81761277, a: 1}
     - _AdvancedDissolveEdgeColor2: {r: 1, g: 0, b: 0, a: 1}
     - _AdvancedDissolveEdgeColor2Intensity: {r: 0, g: 0, b: 0, a: 0}

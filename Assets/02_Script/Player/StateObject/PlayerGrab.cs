@@ -65,7 +65,7 @@ public class PlayerGrab : PlayerRoot
     private Vector3 CalculateObjectPos(float objSize)
     {
 
-        var vel = Physics.Raycast(cameraRootTrm.position, cameraRootTrm.forward, out var info, InteractionRange);
+        var vel = Physics.Raycast(cameraRootTrm.position, cameraRootTrm.forward, out var info, InteractionRange / 2);
 
         if (vel && info.transform != grabObject.Item2)
         {
@@ -78,7 +78,7 @@ public class PlayerGrab : PlayerRoot
         else
         {
 
-            return cameraRootTrm.position + (cameraRootTrm.forward * InteractionRange);
+            return cameraRootTrm.position + (cameraRootTrm.forward * (InteractionRange / 2));
 
         }
 

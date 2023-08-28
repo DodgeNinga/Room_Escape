@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
+           
         inputSystem = new PlayerInputSystem();
         var playerMove = new PlayerMove(this);
         var playerJump = new PlayerJump(this);
@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
 
         stateUpdateContainer.Add(PlayerState.Move, moveStateUpdate);
         stateFixedUpdateContainer.Add(PlayerState.Move, moveFixedUpdate);
-
         ChangeState(currentState);
 
     }

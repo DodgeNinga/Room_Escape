@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jewel : GrabAbleObject, IGrab
+public class Jewel : GrabAbleObject, IGrab, IEnable
 {
 
     private Vector3 originPos;
     private float moveValue;
-    private bool moveAble = true;
+    private Rigidbody rigid;
+
+    public bool enable { get; set; }
 
     private void Awake()
     {
         
         originPos = transform.position;
+        rigid = GetComponent<Rigidbody>();
+        Enable();
 
     }
 
@@ -26,25 +30,16 @@ public class Jewel : GrabAbleObject, IGrab
     private void SinMove()
     {
 
-        if (!moveAble) return;
+        if (enable) return;
 
-        transform.position = originPos + new Vector3(0, Mathf.Sin(moveValue), 0);
-
+        transform.position = originPos + new Vector3(0, Mathf.Sin(moveValue) / 8, 0);
         moveValue += Time.deltaTime;
-
-    }
-
-    public void OnGrab()
-    {
-
-        moveAble = false;
 
     }
 
     public void OnGrabRelease() 
     {
     
-        moveAble = true;
         originPos = transform.position;
         moveValue = 0;
 
@@ -55,6 +50,22 @@ public class Jewel : GrabAbleObject, IGrab
 
         originPos = pos;
         moveValue = 0;
+
+    }
+
+    public void Enable()
+    {
+
+        enable = true;
+
+    }
+
+    public void Disable()
+    {
+
+        enable = false;
+        rigid.useGravity = false;
+        gameObject.layer = 0;
 
     }
 

@@ -5,12 +5,14 @@ using UnityEngine;
 public class Pillar : PuzzleBehaviour
 {
 
-    [SerializeField] private CollisionSencer jewelSencer;
+    [SerializeField] private SencerRoot jewelSencer;
     [SerializeField] private Transform jewelPos;
     [SerializeField] private Jewel jewel;
 
     private void Update()
     {
+
+        if (isInteraction) return;
 
         if (jewelSencer.isDetected)
         {
@@ -37,6 +39,9 @@ public class Pillar : PuzzleBehaviour
         //페이드 이밴트
 
         jewel.SetOriginPos(jewelPos.position);
+        jewel.Disable();
+
+        Debug.Log("asdf");
 
     }
 

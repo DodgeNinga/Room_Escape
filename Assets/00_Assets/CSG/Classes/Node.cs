@@ -130,6 +130,7 @@ namespace Parabox.CSG
                 }
             }
 
+
             if (listBack.Count > 0)
             {
                 if (newNode && list.SequenceEqual(listBack))

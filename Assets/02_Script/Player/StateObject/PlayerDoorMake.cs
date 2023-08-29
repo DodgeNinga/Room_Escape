@@ -59,7 +59,7 @@ public class PlayerDoorMake : PlayerRoot
 
                     newObj.layer = item.transform.gameObject.layer;
 
-                    Object.Destroy(item.transform.gameObject);
+                    //Object.Destroy(item.transform.gameObject);
 
                 }
 

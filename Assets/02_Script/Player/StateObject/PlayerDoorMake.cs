@@ -2,6 +2,7 @@ using AmazingAssets.AdvancedDissolve;
 using Parabox.CSG;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerDoorMake : PlayerRoot
@@ -34,7 +35,6 @@ public class PlayerDoorMake : PlayerRoot
         if (input[MouseCode.Left, KeyState.Down])
         {
 
-            Debug.Log(123);
 
             var obj = Physics.BoxCastAll(doorBooleanObject.transform.position, 
                 doorBooleanObject.transform.localScale / 2, 
@@ -48,18 +48,17 @@ public class PlayerDoorMake : PlayerRoot
 
                 foreach(var item in obj)
                 {
+                    CSG.MonoSubtract(item.transform.gameObject, doorBooleanObject, (res) => {
+                        var newObj = new GameObject();
 
-                    var res = CSG.Subtract(item.transform.gameObject, doorBooleanObject);
+                        newObj.AddComponent<MeshFilter>().sharedMesh = res.mesh;
+                        newObj.AddComponent<MeshCollider>().sharedMesh = res.mesh;
+                        newObj.AddComponent<MeshRenderer>().sharedMaterials = res.materials.ToArray();
 
-                    var newObj = new GameObject();
+                        Object.Destroy(item.transform.gameObject);
 
-                    newObj.AddComponent<MeshFilter>().sharedMesh = res.mesh;
-                    newObj.AddComponent<MeshCollider>().sharedMesh = res.mesh;
-                    newObj.AddComponent<MeshRenderer>().sharedMaterials = res.materials.ToArray();
+                    });
 
-                    newObj.layer = item.transform.gameObject.layer;
-
-                    //Object.Destroy(item.transform.gameObject);
 
                 }
 

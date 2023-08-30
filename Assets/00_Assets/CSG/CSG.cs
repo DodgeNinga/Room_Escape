@@ -15,6 +15,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace Parabox.CSG
 {
@@ -77,7 +78,7 @@ namespace Parabox.CSG
             Node b = new Node(csg_model_b.ToPolygons());
         
             List<Polygon> polygons = Node.Union(a, b).AllPolygons();
-        
+            
             return new Model(polygons);
         }
         
@@ -98,6 +99,19 @@ namespace Parabox.CSG
             List<Polygon> polygons = Node.Subtract(a, b).AllPolygons();
         
             return new Model(polygons);
+        }
+
+        public static void MonoSubtract(GameObject lhs, GameObject rhs, Action<Model> endEvt)
+        {
+            Model csg_model_a = new Model(lhs);
+            Model csg_model_b = new Model(rhs);
+
+            Node a = new Node(csg_model_a.ToPolygons());
+            Node b = new Node(csg_model_b.ToPolygons());
+
+            List<Polygon> polygons = new();
+            Node.MonoSubtract(a, b, (v) => { polygons = v; endEvt(new Model(polygons)); });
+
         }
 
         /// <summary>

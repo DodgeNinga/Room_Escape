@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FD.Dev;
+using System;
 
 namespace Parabox.CSG
 {
@@ -23,6 +25,13 @@ namespace Parabox.CSG
         public Node(List<Polygon> list)
         {
             Build(list);
+        }
+
+        public Node(List<Polygon> list, Action endEvt)
+        {
+
+            MonoBuild(list, endEvt);
+
         }
 
         public Node(List<Polygon> list, Plane plane, Node front, Node back)
@@ -151,6 +160,86 @@ namespace Parabox.CSG
             }
         }
 
+        public void MonoBuild(List<Polygon> list, Action endEvt)
+        {
+
+            if (list.Count < 1)
+            {
+                return;
+
+            }
+
+            bool newNode = plane == null || !plane.Valid();
+
+            if (newNode)
+            {
+                plane = new Plane();
+                plane.normal = list[0].plane.normal;
+                plane.w = list[0].plane.w;
+            }
+
+            if (polygons == null)
+                polygons = new List<Polygon>();
+
+            var listFront = new List<Polygon>();
+            var listBack = new List<Polygon>();
+
+            for (int i = 0; i < list.Count; i++)
+                plane.SplitPolygon(list[i], polygons, polygons, listFront, listBack);
+
+
+            if (listFront.Count > 0)
+            {
+                // SplitPolygon can fail to correctly identify coplanar planes when the epsilon value is too low. When
+                // this happens, the front or back list will be filled and built into a new node recursively. This 
+                // check catches that case and sorts the front/back lists into the coplanar polygons collection.
+                if (newNode && list.SequenceEqual(listFront))
+                    polygons.AddRange(listFront);
+                else
+                {
+
+                    if (front == null)
+                    {
+
+                        front = new Node();
+
+                    }
+
+                    FAED.MonoCo(() => front.MonoBuild(listFront,  null));
+
+                }
+            }
+
+
+            if (listBack.Count > 0)
+            {
+                if (newNode && list.SequenceEqual(listBack))
+                    polygons.AddRange(listBack);
+                else
+                {
+
+                    if (back == null)
+                    {
+
+                        back = new Node();
+
+                    }
+
+                    FAED.MonoCo(() => back.MonoBuild(listBack, null));
+
+                }
+            }
+
+            if(endEvt != null)
+            {
+
+                FAED.InvokeDelayRealTime(endEvt, 0.25f);
+
+            }
+
+
+        }
+
         // Recursively remove all polygons in `polygons` that are inside this BSP tree.
         public List<Polygon> ClipPolygons(List<Polygon> list)
         {
@@ -251,6 +340,44 @@ namespace Parabox.CSG
             Node ret = new Node(a.AllPolygons());
         
             return ret;
+        }
+
+        public static void MonoSubtract(Node a1, Node b1, Action<List<Polygon>> endEvt)
+        {
+
+            Node a = a1.Clone();
+            Node b = b1.Clone();
+
+            a.Invert();
+            a.ClipTo(b);
+            b.ClipTo(a);
+            b.Invert();
+            b.ClipTo(a);
+            b.Invert();
+            a.Build(b.AllPolygons());
+            a.Invert();
+
+            Node ret = new Node();
+            ret.MonoBuild(a.AllPolygons(), () =>
+            {
+
+                try
+                {
+
+                    endEvt?.Invoke(ret.AllPolygons());
+
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.Log("야 시발 에러");
+
+                }
+
+
+            });
+
+
         }
 
         // Return a new CSG solid representing space both this solid and in the

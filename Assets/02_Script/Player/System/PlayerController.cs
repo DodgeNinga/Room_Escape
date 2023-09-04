@@ -8,6 +8,7 @@ public enum PlayerState
     None = -1,
     Move,
     DoorMake,
+    Mask,
     Die
 
 }

@@ -49,11 +49,13 @@ public class PlayerDoorMake : PlayerRoot
                 foreach(var item in obj)
                 {
                     CSG.MonoSubtract(item.transform.gameObject, doorBooleanObject, (res) => {
+
                         var newObj = new GameObject();
 
                         newObj.AddComponent<MeshFilter>().sharedMesh = res.mesh;
                         newObj.AddComponent<MeshCollider>().sharedMesh = res.mesh;
                         newObj.AddComponent<MeshRenderer>().sharedMaterials = res.materials.ToArray();
+                        newObj.layer = item.transform.gameObject.layer;
 
                         Object.Destroy(item.transform.gameObject);
 

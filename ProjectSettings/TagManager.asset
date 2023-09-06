@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Jewel
+  - Stone
   layers:
   - Default
   - TransparentFX

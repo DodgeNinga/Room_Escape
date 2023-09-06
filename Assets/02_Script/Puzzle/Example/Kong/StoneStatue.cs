@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class StoneStatue : PuzzleBehaviour
 {
-    [SerializeField] private SencerRoot stoneSencer;
+    [SerializeField] private StoneSencer stoneSencer;
     [SerializeField] private Transform stonePos;
     [SerializeField] private Stone stone;
 
     private void Update()
     {
-        if (!isInteraction) return;
 
-        if (stoneSencer.isDetected)
-        {
-            isInteraction = true;
-            PuzzleComplete();
-        }
     }
 
     public override void OnMouse()
     {
         if (isInteraction) return;
+
+        if (input[KeyCode.E, KeyState.Down])
+        {
+            Debug.Log("∆€¡Ò ªÛ»£¿€øÎ");
+
+            isInteraction = true;
+
+            PuzzleComplete();
+
+        }
     }
 
     protected override void PuzzleComplete()
     {
+        stone.gameObject.SetActive(true);
         stone.SetOriginPos(stonePos.position);
         stone.Disable();
 
-        Debug.Log("Puzzle End!!");
+        Debug.Log("∆€¡Ò ≥°!");
+
     }
+
 }

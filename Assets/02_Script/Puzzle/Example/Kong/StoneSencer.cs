@@ -2,21 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneCencer : SencerRoot
+public class StoneSencer : SencerRoot
 {
+    public bool stonePuzzle = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if(CompareTag("Stone"))
+        if(other.CompareTag("Stone"))
         {
             isDetected = true;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if(CompareTag("Stone"))
-        {
-            isDetected = true;
+            stonePuzzle = true;
         }
     }
 }

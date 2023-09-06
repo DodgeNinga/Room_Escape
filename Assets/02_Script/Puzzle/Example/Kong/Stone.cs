@@ -7,6 +7,7 @@ public class Stone : GrabAbleObject, IGrab, IEnable
     private Vector3 originPos;
     private float moveValue;
     private Rigidbody rigid;
+    private bool stoneUse = false;
 
     public bool enable { get; set; }
 
@@ -21,6 +22,16 @@ public class Stone : GrabAbleObject, IGrab, IEnable
 
     private void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("마우스 입력 받음");
+            if(stoneUse == false)
+            {
+                gameObject.SetActive(false);
+                Debug.Log("돌 먹음");
+                stoneUse = true;
+            }
+        }
 
         SinMove();
 

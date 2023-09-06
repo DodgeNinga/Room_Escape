@@ -12,6 +12,8 @@ public class MaskManager : MonoBehaviour
     [SerializeField] private Volume maskVolume;
     [SerializeField] private Image fadeImage;
 
+    public event Action OnMaskChangeHandle;
+
     private void Awake()
     {
 
@@ -84,6 +86,7 @@ public class MaskManager : MonoBehaviour
         fadeImage.color = Color.black;
 
         fadeEvent?.Invoke();
+        OnMaskChangeHandle?.Invoke();
 
         while(per < 1)
         {

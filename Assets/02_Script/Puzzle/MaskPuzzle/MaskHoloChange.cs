@@ -9,24 +9,37 @@ public class MaskHoloChange : MonoBehaviour
     [SerializeField, Header("홀로그램 메터리얼")] private Material holoMat;
 
     private MeshRenderer meshRenderer;
-    private bool isMaskChanged;
+    private MaskManager maskManager;
+    private bool isMaskChanged = true;
 
     private void Awake()
     {
         
         meshRenderer = GetComponent<MeshRenderer>();
+        maskManager = FindObjectOfType<MaskManager>();
+
+    }
+
+    private void Start()
+    {
+
+        maskManager.OnMaskChangeHandle += HandleMaskChangeEvent;
 
     }
 
     private void HandleMaskChangeEvent()
     {
 
-        if(isMaskChanged)
-        {
+        isMaskChanged = !isMaskChanged;
 
+        meshRenderer.material = isMaskChanged ?  holoMat : originMat;
 
+    }
 
-        }
+    private void OnDisable()
+    {
+        
+        maskManager.OnMaskChangeHandle -= HandleMaskChangeEvent;
 
     }
 

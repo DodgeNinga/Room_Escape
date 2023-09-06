@@ -54,13 +54,13 @@ Material:
     - _DstBlend: 1
     - _EmissiveBoost: 211
     - _EnableFogOnTransparent: 1
-    - _Fade: 0.906
-    - _Flicker: 0.16
+    - _Fade: 1
+    - _Flicker: 0
     - _FresMult: 1
     - _FresMultOut: 5.1
     - _FresPow: 4.21
     - _FresPowOut: 5.46
-    - _InvFade: 1.75
+    - _InvFade: 19.6
     - _ReceivesSSR: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
@@ -90,10 +90,10 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Inter: {r: 0.1, g: 200, b: 100, a: 33}
+    - _Inter: {r: 200, g: 200, b: 100, a: 33}
     - _InterScale: {r: 0.1, g: 200, b: 100, a: 0}
     - _TintColor: {r: 0.2352941, g: 0.7784991, b: 1, a: 1}
-    - _bLayerColorA: {r: 0.050281085, g: 0.12897459, b: 0.22058812, a: 0.391}
-    - _bLayerColorB: {r: 0.18382353, g: 0.76358986, b: 1, a: 0.5019608}
-    - _bLayerColorC: {r: 0.5735295, g: 0.78823537, b: 1, a: 0.5019608}
+    - _bLayerColorA: {r: 0.050281063, g: 0.12897456, b: 0.22058809, a: 1}
+    - _bLayerColorB: {r: 0.1838235, g: 0.76358986, b: 1, a: 1}
+    - _bLayerColorC: {r: 0.5735295, g: 0.78823537, b: 1, a: 1}
   m_BuildTextureStacks: []

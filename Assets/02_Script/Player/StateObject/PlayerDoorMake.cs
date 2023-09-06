@@ -55,7 +55,6 @@ public class PlayerDoorMake : PlayerRoot
                         newObj.AddComponent<MeshFilter>().sharedMesh = res.mesh;
                         newObj.AddComponent<MeshCollider>().sharedMesh = res.mesh;
                         newObj.AddComponent<MeshRenderer>().sharedMaterials = res.materials.ToArray();
-                        newObj.layer = item.transform.gameObject.layer;
 
                         Object.Destroy(item.transform.gameObject);
 

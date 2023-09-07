@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PressurePlates : MonoBehaviour
 {
-    string order;
+    public string Answer;
+
+    private string order = "";
 
     private void Start()
     {
@@ -26,7 +28,7 @@ public class PressurePlates : MonoBehaviour
         if (order.Length >= transform.childCount)
         {
 
-            if (order == "0312")
+            if (order == Answer)
             {
                 Debug.Log("¼º°ø");
 

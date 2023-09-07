@@ -26,7 +26,7 @@ public class TrunOnLight : PuzzleBehaviour
         if (isInteraction || !enable) return;
 
         //로그 출력
-        Debug.Log("상호작용 대기중");
+        //Debug.Log("상호작용 대기중");
 
         if (input[KeyCode.E, KeyState.Down] && distance <= 3)
         {

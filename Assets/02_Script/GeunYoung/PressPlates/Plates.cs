@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Plates : MonoBehaviour
 {
+    public Material notPushedColor;
+    public Material pushedColor;
+
     public int order;
 
     private bool isPushed = false;
@@ -13,6 +16,12 @@ public class Plates : MonoBehaviour
     private void Start()
     {
         plates = FindObjectOfType<PressurePlates>();
+    }
+
+    private void Update()
+    {
+        if (isPushed) transform.GetComponent<MeshRenderer>().material = pushedColor;
+        else transform.GetComponent<MeshRenderer>().material = notPushedColor;
     }
 
     public void SetOrder(int num)

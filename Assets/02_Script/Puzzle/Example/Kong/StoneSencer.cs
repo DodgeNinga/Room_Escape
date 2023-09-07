@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class StoneSencer : SencerRoot
 {
-    public bool stonePuzzle = false;
+    public bool stonePuzzleOn = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Stone"))
         {
             isDetected = true;
-            stonePuzzle = true;
+            stonePuzzleOn = true;
+            Debug.Log("Stone ON");
         }
     }
 }

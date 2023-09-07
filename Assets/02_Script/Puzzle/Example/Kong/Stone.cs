@@ -24,11 +24,9 @@ public class Stone : GrabAbleObject, IGrab, IEnable
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("마우스 입력 받음");
             if(stoneUse == false)
             {
                 gameObject.SetActive(false);
-                Debug.Log("돌 먹음");
                 stoneUse = true;
             }
         }

@@ -19,7 +19,6 @@ public class StoneStatue : PuzzleBehaviour
 
         if (input[KeyCode.E, KeyState.Down])
         {
-            Debug.Log("∆€¡Ò ªÛ»£¿€øÎ");
 
             isInteraction = true;
 
@@ -33,9 +32,6 @@ public class StoneStatue : PuzzleBehaviour
         stone.gameObject.SetActive(true);
         stone.SetOriginPos(stonePos.position);
         stone.Disable();
-
-        Debug.Log("∆€¡Ò ≥°!");
-
     }
 
 }
